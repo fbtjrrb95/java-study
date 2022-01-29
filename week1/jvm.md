@@ -50,7 +50,11 @@
 - 그 코드가 실행할 때, 네이티브 메소드 스택이 생김.
 - jvm 스택과 마찬가지로, StackOverFlowError, OutOfMemoryError 발생할 수 있음.
 
-#### PC
+#### PC register
+- 쓰레드마다 PC (Program Counter) 레지스터를 만듬.
+- 쓰레드 내에서 다음에 실행할 명령어의 위치를 저장하고 있음.
+- PC register 정보를 가지고 프로그램 플로우 (loops, jump, exceptions ..)를 진행.
+
 #### 힙
 #### 메소드
 

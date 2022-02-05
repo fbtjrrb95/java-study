@@ -10,7 +10,7 @@ public class FileReaderTest {
     public void test() {
 
         FileReader fileReader = new FileReader();
-        File file = new File(String.format("src/test/java/me/screw/javademostudy/file/test.xlsx"));
+        File file = new File("src/test/java/me/screw/javademostudy/file/test.xlsx");
         fileReader.read(file);
 
     }

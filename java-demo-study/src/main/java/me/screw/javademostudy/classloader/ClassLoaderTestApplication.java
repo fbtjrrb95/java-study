@@ -1,4 +1,4 @@
-package me.screw.javademostudy.jvm;
+package me.screw.javademostudy.classloader;
 
 import java.lang.reflect.Field;
 import java.util.Vector;

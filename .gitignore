@@ -1,4 +1,6 @@
 .idea
-/java-demo-study/.gradle
-/java-demo-study/build
-/java-demo-study/gradle
+.gradle
+build
+gradle
+gradlew
+gradlew.bat

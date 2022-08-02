@@ -1,6 +1,6 @@
 package me.screw.javademostudy.heap;
 
-public class TestThread implements Runnable{
+public class TestThread implements Runnable {
 
     private final HeapTest heapTest;
     private int stackTest;

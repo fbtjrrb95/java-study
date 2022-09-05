@@ -1,13 +1,19 @@
 package me.screw.javademostudy.lock;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import lombok.Setter;
+
+import javax.persistence.*;
 
 @Entity
+@Table(name = "bank")
 public class Bank {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long accountId;
+    @Setter
     private String category;
+
+    @Setter
+    private String name;
 }

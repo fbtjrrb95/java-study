@@ -1,11 +1,9 @@
 package me.screw.javademostudy.lock;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 
 public class LockTestApplication {
 

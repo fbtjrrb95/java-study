@@ -1,9 +1,9 @@
 package me.screw.javademostudy.lock;
 
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 import javax.persistence.*;
+import java.util.List;
 
 public class LockTestApplication {
 
@@ -25,45 +25,46 @@ public class LockTestApplication {
     }
 
     @Test
-    public void LockTimeOutExceptionTest() {
+    public void QueryTimeOutExceptionTest() {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("bankUnit");
         EntityManager entityManager1 = entityManagerFactory.createEntityManager();
         EntityManager entityManager2 = entityManagerFactory.createEntityManager();
+
         new Thread(() -> {
-            findBank(entityManager1, 1L);
+            System.out.println(findBank(entityManager1, 1L));
+            entityManager1.close();
+        }).start();
+
+        new Thread(() -> {
+            System.out.println(findBank(entityManager2, 1L));
+            entityManager2.close();
         }).start();
 
         try {
-            Thread.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        new Thread(() -> {
-            findBank(entityManager2, 1L);
-        }).start();
-
-        try {
-            Thread.sleep(10000);
+            Thread.sleep(10_000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
     public Bank findBank(EntityManager entityManager, Long id) {
-        System.out.println(Thread.currentThread().getId() + " thread start");
         EntityTransaction transaction = entityManager.getTransaction();
+        System.out.println(transaction + " transaction start");
         transaction.begin();
-        Bank bank = entityManager.find(Bank.class, id, LockModeType.PESSIMISTIC_WRITE);
+        List<Bank> resultList = entityManager.createQuery("select b from Bank b where b.id = ?1")
+                .setParameter(1, id)
+                .setHint("javax.persistence.query.timeout", "2000")
+                .setLockMode(LockModeType.PESSIMISTIC_WRITE)
+                .getResultList();
         try {
             Thread.sleep(3_000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(Thread.currentThread().getId() + " thread end");
+        System.out.println(transaction + " transaction end");
         transaction.commit();
-        entityManager.close();
-        return bank;
+        if (resultList == null || resultList.isEmpty()) return null;
+        return resultList.get(0);
     }
 
 }

@@ -19,11 +19,13 @@ dependencies {
     implementation 'mysql:mysql-connector-java:8.0.28'
 
     implementation 'org.eclipse.persistence:javax.persistence:2.2.1'
-    implementation 'org.hibernate:hibernate-core:4.3.10.Final'
-    implementation 'org.hibernate:hibernate-entitymanager:4.3.10.Final'
+    implementation 'org.hibernate:hibernate-core:5.3.1.Final'
+    implementation 'org.hibernate:hibernate-entitymanager:5.3.1.Final'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:2.3.2'
+    implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.2'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
 }
 

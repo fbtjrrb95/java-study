@@ -24,6 +24,9 @@ public class LockTestApplication {
         entityManager.close();
     }
 
+    /**
+     * 정말? mysql jpa 는 pessimistic-write option 을 무시한다고?
+     */
     @Test
     public void QueryTimeOutExceptionTest() {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("bankUnit");

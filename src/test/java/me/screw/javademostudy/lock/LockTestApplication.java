@@ -3,7 +3,9 @@ package me.screw.javademostudy.lock;
 import org.junit.jupiter.api.Test;
 
 import javax.persistence.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LockTestApplication {
 
@@ -35,7 +37,6 @@ public class LockTestApplication {
             System.out.println(findBank(entityManager1, 1L, LockModeType.PESSIMISTIC_WRITE, false));
             entityManager1.close();
         }).start();
-
         new Thread(() -> {
             System.out.println(findBank(entityManager2, 1L, LockModeType.PESSIMISTIC_WRITE, false));
             entityManager2.close();
@@ -80,17 +81,18 @@ public class LockTestApplication {
                 Long id,
                 LockModeType lockModeType,
                 boolean isNoWait) {
+        Map<String, Object> hints = new HashMap<>();
+        int timeOut;
+        if (isNoWait) {
+            timeOut = 0;
+        } else {
+            timeOut = 2_000;
+        }
+        hints.put("javax.persistence.lock.timeout", timeOut);
         EntityTransaction transaction = entityManager.getTransaction();
         System.out.println(transaction + " transaction start");
         transaction.begin();
-        Query query = entityManager.createQuery("select b from Bank b where b.id = ?1")
-                .setParameter(1, id)
-                .setHint("javax.persistence.query.timeout", "2000")
-                .setLockMode(lockModeType);
-        if (isNoWait) {
-            query.setHint("javax.persistence.lock.timeout", "0");
-        }
-        List<Bank> resultList = query.getResultList();
+        Bank bank = entityManager.find(Bank.class, id, lockModeType, hints);
         try {
             Thread.sleep(3_000);
         } catch (InterruptedException e) {
@@ -98,10 +100,7 @@ public class LockTestApplication {
         }
         System.out.println(transaction + " transaction end");
         transaction.commit();
-        if (resultList == null || resultList.isEmpty()) {
-            return null;
-        }
-        return resultList.get(0);
+        return bank;
     }
 
 }

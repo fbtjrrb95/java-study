@@ -1,10 +1,11 @@
 package me.screw.javademostudy.lock;
 
+import org.hibernate.CacheMode;
+import org.hibernate.jpa.QueryHints;
 import org.junit.jupiter.api.Test;
 
 import javax.persistence.*;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class LockTestApplication {
@@ -27,18 +28,23 @@ public class LockTestApplication {
     }
 
 
+    // TODO: entityManager.find 로 바꾸니깐 왜 queryTimeOutException 이 나지 않는 거지?
     @Test
     public void QueryTimeOutExceptionTest() {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("bankUnit");
+        Map<String, Object> props = new HashMap<>();
+        props.put("javax.persistence.lock.timeout", 1_000);
+        props.put("javax.persistence.query.timeout", 1_000);
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("bankUnit", props);
         EntityManager entityManager1 = entityManagerFactory.createEntityManager();
         EntityManager entityManager2 = entityManagerFactory.createEntityManager();
 
         new Thread(() -> {
-            System.out.println(findBank(entityManager1, 1L, LockModeType.PESSIMISTIC_WRITE, false));
+            System.out.println(findBank(entityManager1, 1L, LockModeType.PESSIMISTIC_WRITE));
             entityManager1.close();
         }).start();
+
         new Thread(() -> {
-            System.out.println(findBank(entityManager2, 1L, LockModeType.PESSIMISTIC_WRITE, false));
+            System.out.println(findBank(entityManager2, 1L, LockModeType.PESSIMISTIC_WRITE));
             entityManager2.close();
         }).start();
 
@@ -55,17 +61,19 @@ public class LockTestApplication {
      */
     @Test
     public void NoWaitExceptionTest() {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("bankUnit");
+        Map<String, Object> props = new HashMap<>();
+        props.put("javax.persistence.lock.timeout", 0);
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("bankUnit", props);
         EntityManager entityManager1 = entityManagerFactory.createEntityManager();
         EntityManager entityManager2 = entityManagerFactory.createEntityManager();
 
         new Thread(() -> {
-            System.out.println(findBank(entityManager1, 1L, LockModeType.PESSIMISTIC_WRITE, true));
+            System.out.println(findBank(entityManager1, 1L, LockModeType.PESSIMISTIC_WRITE));
             entityManager1.close();
         }).start();
 
         new Thread(() -> {
-            System.out.println(findBank(entityManager2, 1L, LockModeType.PESSIMISTIC_WRITE, true));
+            System.out.println(findBank(entityManager2, 1L, LockModeType.PESSIMISTIC_WRITE));
             entityManager2.close();
         }).start();
 
@@ -79,20 +87,12 @@ public class LockTestApplication {
     public Bank findBank(
                 EntityManager entityManager,
                 Long id,
-                LockModeType lockModeType,
-                boolean isNoWait) {
-        Map<String, Object> hints = new HashMap<>();
-        int timeOut;
-        if (isNoWait) {
-            timeOut = 0;
-        } else {
-            timeOut = 2_000;
-        }
-        hints.put("javax.persistence.lock.timeout", timeOut);
+                LockModeType lockModeType) {
         EntityTransaction transaction = entityManager.getTransaction();
         System.out.println(transaction + " transaction start");
         transaction.begin();
-        Bank bank = entityManager.find(Bank.class, id, lockModeType, hints);
+        Bank bank = entityManager.find(Bank.class, id, lockModeType);
+        entityManager.flush();
         try {
             Thread.sleep(3_000);
         } catch (InterruptedException e) {

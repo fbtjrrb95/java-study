@@ -1,7 +1,5 @@
 package me.screw.javademostudy.lock;
 
-import org.hibernate.CacheMode;
-import org.hibernate.jpa.QueryHints;
 import org.junit.jupiter.api.Test;
 
 import javax.persistence.*;

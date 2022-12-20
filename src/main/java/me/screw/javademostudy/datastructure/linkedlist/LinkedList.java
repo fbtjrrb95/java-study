@@ -22,7 +22,7 @@ public class LinkedList {
         if (nodeToRemove.getNext() != null) {
             prevNodeToRemove.setNext(nodeToRemove.getNext());
         }
-        return prevNodeToRemove;
+        return nodeToRemove;
     }
 
     public boolean contains(ListNode head, ListNode nodeToCheck) {

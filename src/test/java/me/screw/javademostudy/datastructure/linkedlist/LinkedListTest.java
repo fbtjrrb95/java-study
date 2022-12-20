@@ -36,11 +36,20 @@ class LinkedListTest {
         ListNode nodeAtPosition2 = linkedList.add(linkedList.getHead(), listNode3, 2);
 
         ListNode removedNode = linkedList.remove(linkedList.getHead(), 2);
+
         assertThat(removedNode.getNumber()).isEqualTo(2);
         assertThat(nodeAtPosition1.getNext()).isEqualTo(nodeAtPosition2);
     }
 
     @Test
     void contains() {
+        LinkedList linkedList = new LinkedList();
+        ListNode listNode = ListNode.builder().number(1).build();
+        ListNode nodeAtPosition0 = linkedList.add(linkedList.getHead(), listNode, 0);
+
+        ListNode notAddedNode = ListNode.builder().number(2).build();
+
+        assertThat(linkedList.contains(linkedList.getHead(), nodeAtPosition0)).isTrue();
+        assertThat(linkedList.contains(linkedList.getHead(), notAddedNode)).isFalse();
     }
 }

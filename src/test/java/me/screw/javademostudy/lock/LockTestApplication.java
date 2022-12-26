@@ -1,11 +1,13 @@
 package me.screw.javademostudy.lock;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
 
+@Tag("lock")
 public class LockTestApplication {
 
     @Test

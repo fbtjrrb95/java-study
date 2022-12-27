@@ -5,6 +5,7 @@ import lombok.Getter;
 import java.util.Arrays;
 
 public class ArrayStack {
+    @Getter
     private int limit;
     @Getter
     private int size = 0;
@@ -15,7 +16,7 @@ public class ArrayStack {
         this.array = new int[limit];
     }
 
-    public void push(int data) {
+    public synchronized void push(int data) {
         if (size == limit) {
             doubleUp();
         }
@@ -23,7 +24,14 @@ public class ArrayStack {
     }
 
     public int pop() {
+        if (size <= 0) return -1;
         return array[--size];
+    }
+
+    void print() {
+        for (int i : array) {
+            System.out.println(i);
+        }
     }
 
     private void doubleUp() {

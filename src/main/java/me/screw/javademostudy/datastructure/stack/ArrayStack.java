@@ -23,7 +23,7 @@ public class ArrayStack {
         array[size++] = data;
     }
 
-    public int pop() {
+    public synchronized int pop() {
         if (size <= 0) return -1;
         return array[--size];
     }

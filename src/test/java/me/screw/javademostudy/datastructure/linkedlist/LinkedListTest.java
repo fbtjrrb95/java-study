@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.*;
 class LinkedListTest {
 
     @Test
-    public void getNode() {
+    void getNode() {
         LinkedList linkedList = new LinkedList();
         ListNode listNode1 = ListNode.builder().number(1).build();
         linkedList.add(linkedList.getHead(), listNode1, 0);
@@ -22,7 +22,7 @@ class LinkedListTest {
     }
 
     @Test
-    public void add() {
+    void add() {
         LinkedList linkedList = new LinkedList();
         ListNode listNode = ListNode.builder().number(1).build();
         ListNode nodeAtPosition0 = linkedList.add(linkedList.getHead(), listNode, 0);
@@ -38,7 +38,7 @@ class LinkedListTest {
     }
 
     @Test
-    public void add_invalid_position() {
+    void add_invalid_position() {
         LinkedList linkedList = new LinkedList();
         ListNode listNode = ListNode.builder().number(1).build();
         linkedList.add(linkedList.getHead(), listNode, 0);

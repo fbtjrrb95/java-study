@@ -7,21 +7,28 @@ public class LinkedList {
     private final ListNode head = new ListNode(null, null);
 
     public ListNode add(ListNode head, ListNode nodeToAdd, int position) {
-        ListNode node = getNode(head, position);
+        if (position < 0) {
+            throw new IndexOutOfBoundsException("position must be positive");
+        }
+
+        ListNode node = getNode(head, position - 1);
         nodeToAdd.setNext(node.getNext());
         node.setNext(nodeToAdd);
         return nodeToAdd;
     }
 
     public ListNode remove(ListNode head, int positionToRemove) {
+        if (positionToRemove < 0) {
+            throw new IndexOutOfBoundsException("position must be positive");
+        }
+
         ListNode prevNodeToRemove = head;
         if (positionToRemove - 1 >= 0) {
             prevNodeToRemove = getNode(head, positionToRemove - 1);
         }
         ListNode nodeToRemove = prevNodeToRemove.getNext();
-        if (nodeToRemove.getNext() != null) {
-            prevNodeToRemove.setNext(nodeToRemove.getNext());
-        }
+        prevNodeToRemove.setNext(nodeToRemove.getNext());
+        nodeToRemove.setNext(null);
         return nodeToRemove;
     }
 
@@ -42,10 +49,10 @@ public class LinkedList {
         }
     }
 
-    private ListNode getNode(ListNode head, int position) {
+    ListNode getNode(ListNode head, int position) {
         int cnt = position;
         ListNode targetNode = head;
-        while (--cnt >= 0) {
+        while (cnt-- >= 0) {
             if (targetNode.getNext() == null) {
                 throw new RuntimeException("invalid position");
             }

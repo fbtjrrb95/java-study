@@ -17,10 +17,14 @@ class ListStackTest {
 
     @Test
     void push() {
-        int dataToAdd = 1;
-        listStack.push(dataToAdd);
+        listStack.push(1);
+        listStack.push(2);
 
-        assertThat(listStack.getSize()).isEqualTo(1);
+        assertThat(listStack.getSize()).isEqualTo(2);
+
+        LinkedList list = listStack.getList();
+        assertThat(list.getHead().getNext().getNumber()).isEqualTo(1);
+        assertThat(list.getHead().getNext().getNext().getNumber()).isEqualTo(2);
     }
 
     @Test
@@ -29,8 +33,8 @@ class ListStackTest {
         listStack.push(2);
         assertThat(listStack.getSize()).isEqualTo(2);
 
-        int popedNumber = listStack.pop();
-        assertThat(popedNumber).isEqualTo(2);
+        int poppedNumber = listStack.pop();
+        assertThat(poppedNumber).isEqualTo(2);
         assertThat(listStack.getSize()).isEqualTo(1);
     }
 }

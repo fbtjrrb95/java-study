@@ -13,7 +13,7 @@ public class ListStack {
     @Getter
     private int size = 0;
 
-    public void push(int data) {
+    public synchronized void push(int data) {
         ListNode listNode = ListNode.builder().number(data).build();
         list.add(list.getHead(), listNode, size++);
     }

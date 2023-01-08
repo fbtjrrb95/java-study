@@ -4,6 +4,8 @@ import me.screw.javademostudy.datastructure.linkedlist.LinkedList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.*;
 
 class ListStackTest {
@@ -36,5 +38,18 @@ class ListStackTest {
         int poppedNumber = listStack.pop();
         assertThat(poppedNumber).isEqualTo(2);
         assertThat(listStack.getSize()).isEqualTo(1);
+    }
+
+    @Test
+    void push_multiThread환경일때_누락이없는지() {
+        final int cnt = 1_000;
+        int[] integersToPush = new int[cnt];
+        for (int i = 0; i < cnt; i++) {
+            integersToPush[i] = i + 1;
+        }
+        Arrays.stream(integersToPush).parallel()
+                .forEach(listStack::push);
+
+        assertThat(listStack.getSize()).isEqualTo(integersToPush.length);
     }
 }

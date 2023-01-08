@@ -50,9 +50,8 @@ public class LinkedList {
     }
 
     ListNode getNode(ListNode head, int position) {
-        int cnt = position;
         ListNode targetNode = head;
-        while (cnt-- >= 0) {
+        while (position-- >= 0) {
             if (targetNode.getNext() == null) {
                 throw new RuntimeException("invalid position");
             }

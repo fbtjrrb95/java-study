@@ -18,7 +18,7 @@ public class ListStack {
         list.add(list.getHead(), listNode, size++);
     }
 
-    public int pop() {
+    public synchronized int pop() {
         if (size <= 0) return -1;
         ListNode removedNode = list.remove(list.getHead(), --size);
         return removedNode.getNumber();

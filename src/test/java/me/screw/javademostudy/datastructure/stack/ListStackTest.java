@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.concurrent.CompletableFuture;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -51,5 +52,19 @@ class ListStackTest {
                 .forEach(listStack::push);
 
         assertThat(listStack.getSize()).isEqualTo(integersToPush.length);
+    }
+
+    @Test
+    void pop_multiThread환경일때_누락이없는지() {
+        final int cnt = 1_000;
+        for (int i = 0; i < cnt; i++) {
+            listStack.push(i + 1);
+        }
+        Arrays.stream(new int[cnt]).parallel()
+                        .forEach(number -> {
+                            listStack.pop();
+                        });
+
+        assertThat(listStack.getSize()).isEqualTo(0);
     }
 }

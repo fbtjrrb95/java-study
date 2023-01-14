@@ -55,4 +55,19 @@ class ArrayStackTest {
                     .forEach(multiThreadArrayStack::push);
         });
     }
+
+    @Test
+    void pop_multiThread환경일때_누락이없는지() {
+        final int cnt = 1_000;
+        ArrayStack multiThreadArrayStack = new ArrayStack(cnt);
+        for (int i = 0; i < cnt; i++) {
+            multiThreadArrayStack.push(i + 1);
+        }
+        Arrays.stream(new int[cnt]).parallel()
+                .forEach(number -> {
+                    multiThreadArrayStack.pop();
+                });
+
+        assertThat(multiThreadArrayStack.getSize()).isEqualTo(0);
+    }
 }

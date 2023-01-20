@@ -16,15 +16,17 @@ class ArrayQueueTest {
     }
 
     @Test
-    void push() {
+    void pushAndPop() {
         arrayQueue.push(1);
         assertThat(arrayQueue.getSize()).isEqualTo(1);
 
         arrayQueue.push(2);
         assertThat(arrayQueue.getSize()).isEqualTo(2);
-    }
 
-    @Test
-    void pop() {
+        int pop1 = arrayQueue.pop();
+        assertThat(pop1).isEqualTo(1);
+
+        int pop2 = arrayQueue.pop();
+        assertThat(pop2).isEqualTo(2);
     }
 }

@@ -1,6 +1,7 @@
 package me.screw.javademostudy.datastructure.queue;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -23,20 +24,32 @@ class ArrayQueueTest {
         arrayQueue.push(2);
         assertThat(arrayQueue.getSize()).isEqualTo(2);
 
-        int pop1 = arrayQueue.pop();
-        assertThat(pop1).isEqualTo(1);
-
-        int pop2 = arrayQueue.pop();
-        assertThat(pop2).isEqualTo(2);
+        assertThat(arrayQueue.pop()).isEqualTo(1);
+        assertThat(arrayQueue.pop()).isEqualTo(2);
     }
 
     @Test
-    void doubleUp() {
-        int cnt = 20;
-        for (int i = 0; i < cnt; i++) {
+    void push_doubleUp() {
+        for (int i = 0; i < 20; i++) {
             arrayQueue.push(i);
         }
 
         assertThat(arrayQueue.getSize()).isEqualTo(20);
+        assertThat(arrayQueue.getLimit()).isEqualTo(20);
+    }
+
+    @Test
+    @DisplayName("doubleUp 발생했을 때 push, pop test")
+    void pushAndPop_doubleUp() {
+        for (int i = 0; i < 35; i++) {
+            arrayQueue.push(i);
+        }
+
+        assertThat(arrayQueue.getSize()).isEqualTo(35);
+        assertThat(arrayQueue.getLimit()).isEqualTo(40);
+
+        for (int i = 0; i < 35; i++) {
+            assertThat(arrayQueue.pop()).isEqualTo(i);
+        }
     }
 }

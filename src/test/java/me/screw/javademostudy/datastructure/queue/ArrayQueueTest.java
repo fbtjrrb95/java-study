@@ -8,10 +8,10 @@ import static org.assertj.core.api.Assertions.*;
 class ArrayQueueTest {
 
     private ArrayQueue arrayQueue;
-    private int limit = 10;
 
     @BeforeEach
     void setUp() {
+        int limit = 10;
         arrayQueue = new ArrayQueue(limit);
     }
 
@@ -28,5 +28,15 @@ class ArrayQueueTest {
 
         int pop2 = arrayQueue.pop();
         assertThat(pop2).isEqualTo(2);
+    }
+
+    @Test
+    void doubleUp() {
+        int cnt = 20;
+        for (int i = 0; i < cnt; i++) {
+            arrayQueue.push(i);
+        }
+
+        assertThat(arrayQueue.getSize()).isEqualTo(20);
     }
 }

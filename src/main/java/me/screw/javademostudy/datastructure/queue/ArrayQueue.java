@@ -31,7 +31,7 @@ public class ArrayQueue {
     }
 
     private void doubleUp(int popIndex, int size) {
-        limit = (size - popIndex + 1) * 2;
-        array = Arrays.copyOfRange(array, popIndex, size - 1);
+        limit = (size - popIndex) * 2;
+        array = Arrays.copyOfRange(array, popIndex, limit);
     }
 }

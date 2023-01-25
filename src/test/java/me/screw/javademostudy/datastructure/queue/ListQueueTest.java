@@ -17,13 +17,14 @@ class ListQueueTest {
     }
 
     @Test
-    void push() {
+    void pushAndPop() {
         listQueue.push(1);
-
         Assertions.assertThat(listQueue.getSize()).isEqualTo(1);
-    }
 
-    @Test
-    void pop() {
+        listQueue.push(2);
+        Assertions.assertThat(listQueue.getSize()).isEqualTo(2);
+
+        Assertions.assertThat(listQueue.pop()).isEqualTo(1);
+        Assertions.assertThat(listQueue.pop()).isEqualTo(2);
     }
 }

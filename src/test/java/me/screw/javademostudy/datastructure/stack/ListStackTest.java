@@ -32,11 +32,11 @@ class ListStackTest {
     @Test
     void pop() {
         listStack.push(1);
+        assertThat(listStack.getSize()).isEqualTo(1);
         listStack.push(2);
         assertThat(listStack.getSize()).isEqualTo(2);
 
-        int poppedNumber = listStack.pop();
-        assertThat(poppedNumber).isEqualTo(2);
+        assertThat(listStack.pop()).isEqualTo(2);
         assertThat(listStack.getSize()).isEqualTo(1);
     }
 

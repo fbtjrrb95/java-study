@@ -3,6 +3,7 @@ package me.screw.javademostudy.datastructure.queue;
 import me.screw.javademostudy.datastructure.linkedlist.LinkedList;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -31,16 +32,33 @@ class ListQueueTest {
         Assertions.assertThat(listQueue.pop()).isEqualTo(2);
     }
 
-    @Test
-    void push_multiThread환경일때_누락이없는지() {
-        final int cnt = 1_000;
-        int[] integersToPush = new int[cnt];
-        for (int i = 0; i < cnt; i++) {
-            integersToPush[i] = i + 1;
-        }
-        Arrays.stream(integersToPush).parallel()
-                .forEach(listQueue::push);
+    @Nested
+    class multiThreadTest {
+        @Test
+        void push() {
+            final int cnt = 1_000;
+            int[] integersToPush = new int[cnt];
+            for (int i = 0; i < cnt; i++) {
+                integersToPush[i] = i + 1;
+            }
+            Arrays.stream(integersToPush).parallel()
+                    .forEach(listQueue::push);
 
-        assertThat(listQueue.getSize()).isEqualTo(integersToPush.length);
+            assertThat(listQueue.getSize()).isEqualTo(integersToPush.length);
+        }
+
+        @Test
+        void pop() {
+            final int cnt = 1_000;
+            for (int i = 0; i < cnt; i++) {
+                listQueue.push(i + 1);
+            }
+            Arrays.stream(new int[cnt]).parallel()
+                    .forEach(number -> {
+                        listQueue.pop();
+                    });
+
+            assertThat(listQueue.getSize()).isEqualTo(0);
+        }
     }
 }

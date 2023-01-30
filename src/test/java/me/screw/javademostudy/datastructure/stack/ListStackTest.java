@@ -2,6 +2,7 @@ package me.screw.javademostudy.datastructure.stack;
 
 import me.screw.javademostudy.datastructure.linkedlist.LinkedList;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -40,30 +41,34 @@ class ListStackTest {
         assertThat(listStack.getSize()).isEqualTo(1);
     }
 
-    @Test
-    void push_multiThread환경일때_누락이없는지() {
-        final int cnt = 1_000;
-        int[] integersToPush = new int[cnt];
-        for (int i = 0; i < cnt; i++) {
-            integersToPush[i] = i + 1;
-        }
-        Arrays.stream(integersToPush).parallel()
-                .forEach(listStack::push);
+    @Nested
+    class multiThreadTest {
+        @Test
+        void push() {
+            final int cnt = 1_000;
+            int[] integersToPush = new int[cnt];
+            for (int i = 0; i < cnt; i++) {
+                integersToPush[i] = i + 1;
+            }
+            Arrays.stream(integersToPush).parallel()
+                    .forEach(listStack::push);
 
-        assertThat(listStack.getSize()).isEqualTo(integersToPush.length);
+            assertThat(listStack.getSize()).isEqualTo(integersToPush.length);
+        }
+
+        @Test
+        void pop() {
+            final int cnt = 1_000;
+            for (int i = 0; i < cnt; i++) {
+                listStack.push(i + 1);
+            }
+            Arrays.stream(new int[cnt]).parallel()
+                    .forEach(number -> {
+                        listStack.pop();
+                    });
+
+            assertThat(listStack.getSize()).isEqualTo(0);
+        }
     }
 
-    @Test
-    void pop_multiThread환경일때_누락이없는지() {
-        final int cnt = 1_000;
-        for (int i = 0; i < cnt; i++) {
-            listStack.push(i + 1);
-        }
-        Arrays.stream(new int[cnt]).parallel()
-                        .forEach(number -> {
-                            listStack.pop();
-                        });
-
-        assertThat(listStack.getSize()).isEqualTo(0);
-    }
 }

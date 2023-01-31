@@ -32,6 +32,15 @@ class ListQueueTest {
         Assertions.assertThat(listQueue.pop()).isEqualTo(2);
     }
 
+    @Test
+    void pushAndPop_return_minusOne() {
+        listQueue.push(1);
+        Assertions.assertThat(listQueue.getSize()).isEqualTo(1);
+
+        Assertions.assertThat(listQueue.pop()).isEqualTo(1);
+        Assertions.assertThat(listQueue.pop()).isEqualTo(-1);
+    }
+
     @Nested
     class multiThreadTest {
         @Test

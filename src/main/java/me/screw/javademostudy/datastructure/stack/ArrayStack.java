@@ -28,12 +28,6 @@ public class ArrayStack {
         return array[--size];
     }
 
-    void print() {
-        for (int i : array) {
-            System.out.println(i);
-        }
-    }
-
     private void doubleUp() {
         limit *= 2;
         array = Arrays.copyOf(array, limit);

@@ -20,11 +20,15 @@ public class ArrayStack {
         if (size == limit) {
             doubleUp();
         }
+
         array[size++] = data;
     }
 
     public synchronized int pop() {
-        if (size <= 0) return -1;
+        if (size <= 0) {
+            return -1;
+        }
+
         return array[--size];
     }
 

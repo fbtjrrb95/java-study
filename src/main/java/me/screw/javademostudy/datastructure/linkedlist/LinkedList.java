@@ -6,7 +6,7 @@ public class LinkedList {
     @Getter
     private final ListNode head = new ListNode(null, null);
 
-    public ListNode add(ListNode head, ListNode nodeToAdd, int position) {
+    public ListNode add(ListNode nodeToAdd, int position) {
         if (position < 0) {
             throw new IndexOutOfBoundsException("position must be positive");
         }
@@ -17,7 +17,7 @@ public class LinkedList {
         return nodeToAdd;
     }
 
-    public ListNode remove(ListNode head, int positionToRemove) {
+    public ListNode remove(int positionToRemove) {
         if (positionToRemove < 0) {
             throw new IndexOutOfBoundsException("position must be positive");
         }
@@ -35,18 +35,13 @@ public class LinkedList {
     public boolean contains(ListNode head, ListNode nodeToCheck) {
         ListNode curNode = head;
         while (curNode.getNext() != null) {
-            if (curNode.getNext() == nodeToCheck) return true;
+            if (curNode.getNext() == nodeToCheck) {
+                return true;
+            }
+
             curNode = curNode.getNext();
         }
         return false;
-    }
-
-    public void print(ListNode head) {
-        ListNode curNode = head;
-        while (curNode.getNext() != null) {
-            System.out.println(curNode);
-            curNode = curNode.getNext();
-        }
     }
 
     ListNode getNode(ListNode head, int position) {
@@ -55,6 +50,7 @@ public class LinkedList {
             if (targetNode.getNext() == null) {
                 throw new RuntimeException("invalid position");
             }
+
             targetNode = targetNode.getNext();
         }
         return targetNode;

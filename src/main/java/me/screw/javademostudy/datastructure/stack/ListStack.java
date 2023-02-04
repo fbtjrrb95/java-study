@@ -15,12 +15,12 @@ public class ListStack {
 
     public synchronized void push(int data) {
         ListNode listNode = ListNode.builder().number(data).build();
-        list.add(list.getHead(), listNode, size++);
+        list.add(listNode, size++);
     }
 
     public synchronized int pop() {
         if (size <= 0) return -1;
-        ListNode removedNode = list.remove(list.getHead(), --size);
+        ListNode removedNode = list.remove(--size);
         return removedNode.getNumber();
     }
 }

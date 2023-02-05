@@ -34,6 +34,7 @@ class ListStackTest {
     void pop() {
         listStack.push(1);
         assertThat(listStack.getSize()).isEqualTo(1);
+
         listStack.push(2);
         assertThat(listStack.getSize()).isEqualTo(2);
 
@@ -41,8 +42,16 @@ class ListStackTest {
         assertThat(listStack.getSize()).isEqualTo(1);
     }
 
+    @Test
+    void pop_invalid() {
+        assertThatRuntimeException().isThrownBy(() -> {
+            listStack.pop();
+        });
+    }
+
     @Nested
     class multiThreadTest {
+
         @Test
         void push() {
             final int cnt = 1_000;

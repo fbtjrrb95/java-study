@@ -19,8 +19,10 @@ public class ListQueue {
     }
 
     public synchronized int pop() {
-        if (size <= 0) return -1;
-        size--;
+        if (size-- <= 0) {
+            throw new IllegalArgumentException("Invalid Index");
+        }
+
         return list.remove(0).getNumber();
     }
 }

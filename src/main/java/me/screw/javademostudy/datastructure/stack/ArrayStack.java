@@ -26,7 +26,7 @@ public class ArrayStack {
 
     public synchronized int pop() {
         if (size <= 0) {
-            return -1;
+            throw new IllegalArgumentException("Invalid Index");
         }
 
         return array[--size];

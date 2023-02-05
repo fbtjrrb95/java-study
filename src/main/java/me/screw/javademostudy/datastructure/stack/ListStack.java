@@ -19,7 +19,6 @@ public class ListStack {
     }
 
     public synchronized int pop() {
-        if (size <= 0) return -1;
         ListNode removedNode = list.remove(--size);
         return removedNode.getNumber();
     }

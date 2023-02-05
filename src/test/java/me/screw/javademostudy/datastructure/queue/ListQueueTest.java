@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatRuntimeException;
 
 class ListQueueTest {
 
@@ -33,12 +34,14 @@ class ListQueueTest {
     }
 
     @Test
-    void pushAndPop_return_minusOne() {
+    void pushAndPop_invalid() {
         listQueue.push(1);
         Assertions.assertThat(listQueue.getSize()).isEqualTo(1);
 
         Assertions.assertThat(listQueue.pop()).isEqualTo(1);
-        Assertions.assertThat(listQueue.pop()).isEqualTo(-1);
+        assertThatRuntimeException().isThrownBy(() -> {
+            listQueue.pop();
+        });
     }
 
     @Nested

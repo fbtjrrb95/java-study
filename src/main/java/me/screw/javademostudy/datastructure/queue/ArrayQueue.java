@@ -25,8 +25,13 @@ public class ArrayQueue {
     }
 
     public synchronized int pop() {
-        if (size <= 0) return -1;
-        if (popIndex < 0) throw new IllegalArgumentException("Invalid Index");
+        if (popIndex < 0) {
+            throw new IllegalArgumentException("Invalid Index");
+        }
+        if (size - popIndex <= 0) {
+            throw new IllegalArgumentException("must be not empty");
+        }
+
         return array[popIndex++];
     }
 

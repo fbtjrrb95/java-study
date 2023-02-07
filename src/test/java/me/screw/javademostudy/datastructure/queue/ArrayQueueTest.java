@@ -29,6 +29,17 @@ class ArrayQueueTest {
     }
 
     @Test
+    void pushAndPop_invalid() {
+        arrayQueue.push(1);
+        assertThat(arrayQueue.getSize()).isEqualTo(1);
+
+        assertThat(arrayQueue.pop()).isEqualTo(1);
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            arrayQueue.pop();
+        });
+    }
+
+    @Test
     void push_doubleUp() {
         for (int i = 0; i < 20; i++) {
             arrayQueue.push(i);

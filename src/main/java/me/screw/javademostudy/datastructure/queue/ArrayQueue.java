@@ -7,8 +7,7 @@ import java.util.Arrays;
 public class ArrayQueue {
     @Getter
     private int limit;
-    @Getter
-    private int size;
+    private int currentIndex;
     private int popIndex;
     private int[] array;
 
@@ -17,26 +16,30 @@ public class ArrayQueue {
         this.array = new int[limit];
     }
 
+    public int getSize() {
+        return currentIndex - popIndex;
+    }
+
     public synchronized void push(int data) {
-        if (size == limit) {
-            doubleUp(popIndex, size);
+        if (currentIndex == limit) {
+            doubleUp(popIndex, currentIndex);
         }
-        array[size++] = data;
+        array[currentIndex++] = data;
     }
 
     public synchronized int pop() {
         if (popIndex < 0) {
             throw new IllegalArgumentException("Invalid Index");
         }
-        if (size - popIndex <= 0) {
+        if (getSize() <= 0) {
             throw new IllegalArgumentException("must be not empty");
         }
 
         return array[popIndex++];
     }
 
-    private void doubleUp(int popIndex, int size) {
-        limit = (size - popIndex) * 2;
+    private void doubleUp(int popIndex, int currentIndex) {
+        limit = (currentIndex - popIndex) * 2;
         array = Arrays.copyOfRange(array, popIndex, limit);
     }
 }

@@ -46,7 +46,6 @@ class ArrayQueueTest {
         }
 
         assertThat(arrayQueue.getSize()).isEqualTo(20);
-        assertThat(arrayQueue.getLimit()).isEqualTo(20);
 
         for (int i = 0; i < 20; i++) {
             assertThat(arrayQueue.pop()).isEqualTo(i);
@@ -61,7 +60,6 @@ class ArrayQueueTest {
         }
 
         assertThat(arrayQueue.getSize()).isEqualTo(35);
-        assertThat(arrayQueue.getLimit()).isEqualTo(40);
 
         for (int i = 0; i < 35; i++) {
             assertThat(arrayQueue.pop()).isEqualTo(i);

@@ -5,7 +5,6 @@ import lombok.Getter;
 import java.util.Arrays;
 
 public class ArrayQueue {
-    @Getter
     private int limit;
     private int currentIndex;
     private int popIndex;

@@ -1,7 +1,5 @@
 package me.screw.javademostudy.datastructure.queue;
 
-import lombok.Getter;
-
 import java.util.Arrays;
 
 public class ArrayQueue {

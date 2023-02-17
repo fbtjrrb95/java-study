@@ -15,11 +15,15 @@ public class Node {
     private final int value;
     private final List<Node> children = new ArrayList<>();
 
-    public Optional<Node> getChild(int i) {
-        if (i + 1 > getNumOfChildren()) {
+    public Optional<Node> getChild(int indexToGet) {
+        if (indexToGet + 1 > getNumOfChildren()) {
             throw new IllegalArgumentException("invalid index");
         }
-        return Optional.of(children.get(i));
+        return Optional.of(children.get(indexToGet));
+    }
+
+    public void addChild(Node nodeToAdd, int indexToAdd) {
+        children.add(indexToAdd, nodeToAdd);
     }
 
     private int getNumOfChildren() {

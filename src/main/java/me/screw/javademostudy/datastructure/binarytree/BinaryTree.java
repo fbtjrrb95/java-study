@@ -6,33 +6,43 @@ import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-public class BinaryTree implements Tree {
+public class BinaryTree {
 
     private final Node root;
     private final int left = 0;
     private final int right = 1;
     private int limitOfChildren = 2;
 
-    @Override
     public Optional<Node> getRoot() {
         return Optional.ofNullable(root);
     }
+    public Optional<Node> getLeftChild(Node parentNode) {
+        return getChild(parentNode, left);
+    }
 
-    @Override
-    public Optional<Node> getChild(Node node, int i) {
+    public Optional<Node> getRightChild(Node parentNode) {
+        return getChild(parentNode, right);
+    }
+
+    private Optional<Node> getChild(Node node, int indexToGet) {
         Objects.requireNonNull(node);
-        if (isIndexValid(i)) {
+        if (isIndexValid(indexToGet)) {
             throw new IllegalArgumentException("invalid index");
         }
 
-        return node.getChild(i);
+        return node.getChild(indexToGet);
     }
 
-    @Override
-    public void addChild(Node parent, int i) {
+    public void addChild(Node parent, Node nodeToAdd, int indexToAdd) {
+        Objects.requireNonNull(parent);
+        if (indexToAdd < 0) {
+            throw new IllegalArgumentException("invalid index");
+        }
+
+        parent.addChild(nodeToAdd, indexToAdd);
     }
 
-    private boolean isIndexValid(int i) {
-        return i >= 0 && i < limitOfChildren;
+    private boolean isIndexValid(int index) {
+        return index >= 0 && index < limitOfChildren;
     }
 }

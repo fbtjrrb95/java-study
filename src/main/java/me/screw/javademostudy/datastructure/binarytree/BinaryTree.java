@@ -7,15 +7,10 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 public class BinaryTree {
-
-    private final Node root;
     private final int left = 0;
     private final int right = 1;
     private int limitOfChildren = 2;
 
-    public Optional<Node> getRoot() {
-        return Optional.ofNullable(root);
-    }
     public Optional<Node> getLeftChild(Node parentNode) {
         return getChild(parentNode, left);
     }

@@ -7,16 +7,13 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 public class BinaryTree {
-    private final int left = 0;
-    private final int right = 1;
-    private int limitOfChildren = 2;
 
     public Optional<Node> getLeftChild(Node parentNode) {
-        return getChild(parentNode, left);
+        return getChild(parentNode, 0);
     }
 
     public Optional<Node> getRightChild(Node parentNode) {
-        return getChild(parentNode, right);
+        return getChild(parentNode, 1);
     }
 
     private Optional<Node> getChild(Node node, int indexToGet) {
@@ -38,6 +35,6 @@ public class BinaryTree {
     }
 
     private boolean isIndexValid(int index) {
-        return index >= 0 && index < limitOfChildren;
+        return index >= 0 && index < 2;
     }
 }

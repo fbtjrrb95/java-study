@@ -35,9 +35,7 @@ public class LinkedList {
     public boolean contains(ListNode head, ListNode nodeToCheck) {
         ListNode curNode = head;
         while (curNode.getNext() != null) {
-            if (curNode.getNext() == nodeToCheck) {
-                return true;
-            }
+            if (curNode.getNext() == nodeToCheck) return true;
 
             curNode = curNode.getNext();
         }

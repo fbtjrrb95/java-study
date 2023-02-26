@@ -48,4 +48,21 @@ public class GenericLinkedListTest {
         GenericListNode<Integer> nextNext = next.getNext();
         assertThat(nextNext).isNull();
     }
+
+    @Test
+    void remove_맨처음노드_삭제했을경우() {
+        int cnt = 3;
+        for (int i = 0; i < cnt; i++) {
+            linkedList.add(i + 1, i);
+        }
+
+        linkedList.remove(0);
+
+        GenericListNode<Integer> node = linkedList.getHead();
+        int firstNodeItem = 2;
+        while (node.getNext() != null) {
+            assertThat(node.getNext().getItem()).isEqualTo(firstNodeItem++);
+            node = node.getNext();
+        }
+    }
 }

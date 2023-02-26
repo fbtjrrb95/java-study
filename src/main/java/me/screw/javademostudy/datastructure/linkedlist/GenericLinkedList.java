@@ -34,16 +34,18 @@ public class GenericLinkedList<T> {
         return nodeToRemove.getItem();
     }
 
-    public boolean contains(ListNode head, ListNode nodeToCheck) {
-        ListNode curNode = head;
+    public boolean contains(T itemToCheck) {
+        GenericListNode<T> curNode = head;
         while (curNode.getNext() != null) {
-            if (curNode.getNext() == nodeToCheck) return true;
+            if (curNode.getNext().getItem().equals(itemToCheck)) return true;
 
             curNode = curNode.getNext();
         }
         return false;
     }
 
+
+    // TODO: remove head parameter
     private GenericListNode<T> getNode(GenericListNode<T> head, int position) {
         GenericListNode<T> targetNode = head;
         while (position-- >= 0) {

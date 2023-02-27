@@ -65,4 +65,13 @@ public class GenericLinkedListTest {
             node = node.getNext();
         }
     }
+
+    @Test
+    void contains() {
+        Integer addedInteger = linkedList.add(1, 0);
+        Integer notAddedInteger = 2;
+
+        assertThat(linkedList.contains(addedInteger)).isTrue();
+        assertThat(linkedList.contains(notAddedInteger)).isFalse();
+    }
 }

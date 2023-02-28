@@ -12,7 +12,7 @@ public class GenericLinkedList<T> {
             throw new IndexOutOfBoundsException("position must be positive");
         }
 
-        GenericListNode<T> node = getNode(head, position - 1);
+        GenericListNode<T> node = getNode(position - 1);
         GenericListNode<T> nodeToAdd = new GenericListNode<>(valueToAdd);
         nodeToAdd.setNext(node.getNext());
         node.setNext(nodeToAdd);
@@ -26,7 +26,7 @@ public class GenericLinkedList<T> {
 
         GenericListNode<T> prevNodeToRemove = head;
         if (positionToRemove - 1 >= 0) {
-            prevNodeToRemove = getNode(head, positionToRemove - 1);
+            prevNodeToRemove = getNode(positionToRemove - 1);
         }
         GenericListNode<T> nodeToRemove = prevNodeToRemove.getNext();
         prevNodeToRemove.setNext(nodeToRemove.getNext());
@@ -44,9 +44,7 @@ public class GenericLinkedList<T> {
         return false;
     }
 
-
-    // TODO: remove head parameter
-    private GenericListNode<T> getNode(GenericListNode<T> head, int position) {
+    private GenericListNode<T> getNode(int position) {
         GenericListNode<T> targetNode = head;
         while (position-- >= 0) {
             if (targetNode.getNext() == null) {

@@ -19,7 +19,7 @@ public class GenericLinkedList<T> {
         return nodeToAdd.getItem();
     }
 
-    public void remove(int positionToRemove) {
+    public T remove(int positionToRemove) {
         if (positionToRemove < 0) {
             throw new IndexOutOfBoundsException("position must be positive");
         }
@@ -31,6 +31,7 @@ public class GenericLinkedList<T> {
         GenericListNode<T> nodeToRemove = prevNodeToRemove.getNext();
         prevNodeToRemove.setNext(nodeToRemove.getNext());
         nodeToRemove.setNext(null);
+        return nodeToRemove.getItem();
     }
 
     public boolean contains(T itemToCheck) {

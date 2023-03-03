@@ -27,4 +27,13 @@ class GenericListQueueTest {
         Assertions.assertThat(queue.getSize()).isEqualTo(1);
         Assertions.assertThat(queue.pop()).isEqualTo(2);
     }
+
+    @Test
+    void pop_when_empty_queue() {
+        queue.push(1);
+        Assertions.assertThat(queue.getSize()).isEqualTo(1);
+
+        Assertions.assertThat(queue.pop()).isEqualTo(1);
+        Assertions.assertThatRuntimeException().isThrownBy(queue::pop);
+    }
 }

@@ -15,18 +15,15 @@ public class Node {
     private final int value;
     private final List<Node> children = new ArrayList<>();
 
+    public boolean isValidIndex(int indexToGet) {
+        return children.size() > indexToGet;
+    }
+
     public Optional<Node> getChild(int indexToGet) {
-        if (indexToGet + 1 > getNumOfChildren()) {
-            throw new IllegalArgumentException("invalid index");
-        }
         return Optional.of(children.get(indexToGet));
     }
 
     public void addChild(Node nodeToAdd, int indexToAdd) {
         children.add(indexToAdd, nodeToAdd);
-    }
-
-    private int getNumOfChildren() {
-        return this.children.size();
     }
 }

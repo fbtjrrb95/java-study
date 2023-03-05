@@ -36,4 +36,15 @@ class GenericListQueueTest {
         Assertions.assertThat(queue.pop()).isEqualTo(1);
         Assertions.assertThatRuntimeException().isThrownBy(queue::pop);
     }
+
+    @Test
+    void isEmpty() {
+        Assertions.assertThat(queue.isEmpty()).isTrue();
+    }
+
+    @Test
+    void isNotEmpty() {
+        queue.push(1);
+        Assertions.assertThat(queue.isEmpty()).isFalse();
+    }
 }

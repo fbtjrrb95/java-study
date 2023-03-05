@@ -25,4 +25,8 @@ public class GenericListQueue <T> {
         return list.remove(0);
     }
 
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
 }

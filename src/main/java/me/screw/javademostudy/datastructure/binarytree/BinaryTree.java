@@ -6,7 +6,6 @@ import me.screw.javademostudy.datastructure.linkedlist.GenericLinkedList;
 import me.screw.javademostudy.datastructure.queue.GenericListQueue;
 
 import java.util.Objects;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 public class BinaryTree {
@@ -23,41 +22,21 @@ public class BinaryTree {
             Node node = queue.pop();
             System.out.println(node.getValue());
 
-            Optional<Node> leftChild = getLeftChild(node);
-            leftChild.ifPresent(queue::push);
+            Node leftChild = node.getLeftChild();
+            if (Objects.nonNull(leftChild)) queue.push(leftChild);
 
-            Optional<Node> rightChild = getRightChild(node);
-            rightChild.ifPresent(queue::push);
+            Node rightChild = node.getRightChild();
+            if (Objects.nonNull(rightChild)) queue.push(rightChild);
         }
     }
 
-    private Optional<Node> getLeftChild(Node parentNode) {
-        return getChild(parentNode, 0);
-    }
-
-    private Optional<Node> getRightChild(Node parentNode) {
-        return getChild(parentNode, 1);
-    }
-
-    private Optional<Node> getChild(Node node, int indexToGet) {
-        Objects.requireNonNull(node);
-        if (!isIndexValid(indexToGet)) {
-            throw new IllegalArgumentException("invalid index");
-        }
-
-        return node.isValidIndex(indexToGet) ? node.getChild(indexToGet): Optional.empty();
-    }
-
-    public void addChild(Node parent, Node nodeToAdd, int indexToAdd) {
+    public void addLeftChild(Node parent, Node leftChild) {
         Objects.requireNonNull(parent);
-        if (indexToAdd < 0) {
-            throw new IllegalArgumentException("invalid index");
-        }
-
-        parent.addChild(nodeToAdd, indexToAdd);
+        parent.addLeftChild(leftChild);
     }
 
-    private boolean isIndexValid(int index) {
-        return index == 0 || index == 1;
+    public void addRightChild(Node parent, Node rightChild) {
+        Objects.requireNonNull(parent);
+        parent.addRightChild(rightChild);
     }
 }

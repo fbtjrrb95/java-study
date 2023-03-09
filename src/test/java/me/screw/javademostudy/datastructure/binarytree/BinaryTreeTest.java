@@ -34,4 +34,16 @@ class BinaryTreeTest {
         Node root = binaryTree.getRoot();
         binaryTree.bfs(root);
     }
+
+    @Test
+    void bfs_left_child() {
+        Node leftChild = binaryTree.getRoot().getLeftChild();
+        binaryTree.bfs(leftChild);
+    }
+
+    @Test
+    void bfs_right_child() {
+        Node rightChild = binaryTree.getRoot().getRightChild();
+        binaryTree.bfs(rightChild);
+    }
 }

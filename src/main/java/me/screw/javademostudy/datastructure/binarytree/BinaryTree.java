@@ -30,6 +30,14 @@ public class BinaryTree {
         }
     }
 
+    public void dfs(Node node) {
+        if (node == null) return;
+
+        System.out.println(node.getValue());
+        dfs(node.getLeftChild());
+        dfs(node.getRightChild());
+    }
+
     public void addLeftChild(Node parent, Node leftChild) {
         Objects.requireNonNull(parent);
         parent.addLeftChild(leftChild);

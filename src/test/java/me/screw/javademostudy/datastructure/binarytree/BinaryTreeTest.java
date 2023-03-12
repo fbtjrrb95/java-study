@@ -58,4 +58,10 @@ class BinaryTreeTest {
         Node rightLeaf = binaryTree.getRoot().getRightChild().getRightChild();
         binaryTree.bfs(rightLeaf);
     }
+
+    @Test
+    void dfs() {
+        Node root = binaryTree.getRoot();
+        binaryTree.dfs(root);
+    }
 }

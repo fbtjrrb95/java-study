@@ -28,12 +28,16 @@ class ThisTest {
 
     @Test
     void builder() {
-        This thisObject = This.newBuilder()
+        This thisObjectCreatedByBuilder = This.newBuilder()
                 .first(10)
                 .second(20)
                 .third(30)
                 .build();
 
-        assertThat(thisObject.getSum()).isEqualTo(60);
+        This thisObjectCreatedByConstructor = new This(10, 20, 30);
+
+        assertThat(thisObjectCreatedByBuilder.getSum())
+                .isEqualTo(thisObjectCreatedByConstructor.getSum())
+                .isEqualTo(60);
     }
 }

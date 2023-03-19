@@ -3,6 +3,8 @@ package me.screw.javademostudy.datastructure.binarytree;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 class BinaryTreeTest {
 
     private BinaryTree binaryTree;
@@ -30,38 +32,60 @@ class BinaryTreeTest {
     }
 
     @Test
-    void bfs() {
+    void bfs_value_0() {
         Node root = binaryTree.getRoot();
-        binaryTree.bfs(root);
+        Node wantedNode = binaryTree.bfs(root, 0);
+
+        assertThat(wantedNode).isEqualTo(root);
     }
 
     @Test
-    void bfs_left_child() {
-        Node leftChild = binaryTree.getRoot().getLeftChild();
-        binaryTree.bfs(leftChild);
+    void bfs_value_1() {
+        Node root = binaryTree.getRoot();
+        Node wantedNode = binaryTree.bfs(root, 1);
+
+
+        Node leftChild = root.getLeftChild();
+        assertThat(wantedNode).isEqualTo(leftChild);
     }
 
     @Test
-    void bfs_right_child() {
-        Node rightChild = binaryTree.getRoot().getRightChild();
-        binaryTree.bfs(rightChild);
+    void bfs_value_2() {
+        Node root = binaryTree.getRoot();
+        Node wantedNode = binaryTree.bfs(root, 2);
+
+        Node rightChild = root.getRightChild();
+        assertThat(wantedNode).isEqualTo(rightChild);
     }
 
     @Test
-    void bfs_left_leaf() {
-        Node leftLeaf = binaryTree.getRoot().getLeftChild().getLeftChild();
-        binaryTree.bfs(leftLeaf);
+    void bfs_value_3() {
+        Node root = binaryTree.getRoot();
+        Node wantedNode = binaryTree.bfs(root, 3);
+
+        Node leftLeftNode = root.getLeftChild().getLeftChild();
+        assertThat(wantedNode).isEqualTo(leftLeftNode);
     }
 
     @Test
-    void bfs_right_leaf() {
-        Node rightLeaf = binaryTree.getRoot().getRightChild().getRightChild();
-        binaryTree.bfs(rightLeaf);
+    void bfs_value_4() {
+        Node root = binaryTree.getRoot();
+        Node wantedNode = binaryTree.bfs(root, 4);
+
+        Node leftRightNode = root.getLeftChild().getRightChild();
+        assertThat(wantedNode).isEqualTo(leftRightNode);
     }
 
     @Test
     void dfs() {
         Node root = binaryTree.getRoot();
+        binaryTree.dfs(root);
+    }
+
+    @Test
+    void dfs_left_child() {
+        Node root = binaryTree.getRoot();
+        Node leftChild = root.getLeftChild();
         binaryTree.dfs(root);
     }
 }

@@ -13,14 +13,14 @@ public class BinaryTree {
     @Getter
     private final Node root;
 
-    public void bfs(Node startNode) {
+    public Node bfs(Node startNode, int value) {
         GenericLinkedList<Node> list = new GenericLinkedList<>();
         GenericListQueue<Node> queue = new GenericListQueue<>(list);
 
         queue.push(startNode);
         while (!queue.isEmpty()) {
             Node node = queue.pop();
-            System.out.println(node.getValue());
+            if (node.getValue() == value) return node;
 
             Node leftChild = node.getLeftChild();
             if (Objects.nonNull(leftChild)) queue.push(leftChild);
@@ -28,6 +28,7 @@ public class BinaryTree {
             Node rightChild = node.getRightChild();
             if (Objects.nonNull(rightChild)) queue.push(rightChild);
         }
+        return null;
     }
 
     public void dfs(Node node) {

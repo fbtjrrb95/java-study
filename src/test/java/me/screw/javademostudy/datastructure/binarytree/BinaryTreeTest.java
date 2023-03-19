@@ -86,15 +86,55 @@ class BinaryTreeTest {
     }
 
     @Test
-    void dfs() {
+    void dfs_value_no_exist() {
         Node root = binaryTree.getRoot();
-        binaryTree.dfs(root);
+        int noExistedValue = 1_000;
+        Node wantedNode = binaryTree.dfs(root, noExistedValue);
+
+        assertThat(wantedNode).isNull();
     }
 
     @Test
-    void dfs_left_child() {
+    void dfs_value_0(){
         Node root = binaryTree.getRoot();
+        Node wantedNode = binaryTree.dfs(root, 0);
+
+        assertThat(wantedNode).isEqualTo(root);
+    }
+
+    @Test
+    void dfs_value_1() {
+        Node root = binaryTree.getRoot();
+        Node wantedNode = binaryTree.dfs(root, 1);
+
         Node leftChild = root.getLeftChild();
-        binaryTree.dfs(root);
+        assertThat(wantedNode).isEqualTo(leftChild);
+    }
+
+    @Test
+    void dfs_value_2() {
+        Node root = binaryTree.getRoot();
+        Node wantedNode = binaryTree.dfs(root, 2);
+
+        Node rightChild = root.getRightChild();
+        assertThat(wantedNode).isEqualTo(rightChild);
+    }
+
+    @Test
+    void dfs_value_3() {
+        Node root = binaryTree.getRoot();
+        Node wantedNode = binaryTree.dfs(root, 3);
+
+        Node leftLeftNode = root.getLeftChild().getLeftChild();
+        assertThat(wantedNode).isEqualTo(leftLeftNode);
+    }
+
+    @Test
+    void dfs_value_4() {
+        Node root = binaryTree.getRoot();
+        Node wantedNode = binaryTree.dfs(root, 4);
+
+        Node leftRightNode = root.getLeftChild().getRightChild();
+        assertThat(wantedNode).isEqualTo(leftRightNode);
     }
 }

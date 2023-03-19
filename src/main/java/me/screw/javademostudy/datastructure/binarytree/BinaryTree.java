@@ -31,12 +31,14 @@ public class BinaryTree {
         return null;
     }
 
-    public void dfs(Node node) {
-        if (node == null) return;
+    public Node dfs(Node node, int value) {
+        if (node == null) return null;
+        if (node.getValue() == value) return node;
 
-        System.out.println(node.getValue());
-        dfs(node.getLeftChild());
-        dfs(node.getRightChild());
+        Node left = dfs(node.getLeftChild(), value);
+        if (left != null) return left;
+
+        return dfs(node.getRightChild(), value);
     }
 
     public void addLeftChild(Node parent, Node leftChild) {

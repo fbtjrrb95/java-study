@@ -32,6 +32,15 @@ class BinaryTreeTest {
     }
 
     @Test
+    void bfs_value_no_exist() {
+        Node root = binaryTree.getRoot();
+        int noExistedValue = 1_000;
+        Node wantedNode = binaryTree.bfs(root, noExistedValue);
+
+        assertThat(wantedNode).isNull();
+    }
+
+    @Test
     void bfs_value_0() {
         Node root = binaryTree.getRoot();
         Node wantedNode = binaryTree.bfs(root, 0);

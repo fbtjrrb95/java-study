@@ -28,9 +28,7 @@ public class GenericLinkedListTest {
     void add_invalid_position() {
         linkedList.add(1, 0);
         int invalidPosition = 2;
-        assertThatRuntimeException().isThrownBy(() -> {
-            linkedList.add(2, invalidPosition);
-        });
+        assertThatRuntimeException().isThrownBy(() -> linkedList.add(2, invalidPosition));
     }
 
     @Test
@@ -47,6 +45,21 @@ public class GenericLinkedListTest {
         assertThat(next.getItem()).isEqualTo(2);
         GenericListNode<Integer> nextNext = next.getNext();
         assertThat(nextNext).isNull();
+    }
+
+    @Test
+    void remove_중간노드_삭제했을경우() {
+        linkedList.add(1, 0);
+        linkedList.add(2, 1);
+        linkedList.add(3, 2);
+
+        linkedList.remove(1);
+
+        GenericListNode<Integer> node = linkedList.getHead().getNext();
+        assertThat(node.getItem()).isEqualTo(1);
+        GenericListNode<Integer> next = node.getNext();
+
+        assertThat(next.getItem()).isEqualTo(3);
     }
 
     @Test

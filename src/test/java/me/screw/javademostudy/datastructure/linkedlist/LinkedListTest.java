@@ -45,9 +45,7 @@ class LinkedListTest {
 
         ListNode listNode2 = ListNode.builder().number(2).build();
         int invalidPosition = 2;
-        assertThatRuntimeException().isThrownBy(() -> {
-            linkedList.add(listNode2, invalidPosition);
-        });
+        assertThatRuntimeException().isThrownBy(() -> linkedList.add(listNode2, invalidPosition));
     }
 
     @Test
@@ -66,6 +64,25 @@ class LinkedListTest {
 
         assertThat(removedNode.getNumber()).isEqualTo(3);
         assertThat(nodeAtPosition1.getNext()).isNull();
+        assertThat(removedNode.getNext()).isNull();
+    }
+
+    @Test
+    void remove_중간노드_삭제했을경우() {
+        LinkedList linkedList = new LinkedList();
+        ListNode listNode = ListNode.builder().number(1).build();
+        ListNode nodeAtPosition0 = linkedList.add(listNode, 0);
+
+        ListNode listNode2 = ListNode.builder().number(2).build();
+        linkedList.add(listNode2, 1);
+
+        ListNode listNode3 = ListNode.builder().number(3).build();
+        ListNode nodeAtPosition2 = linkedList.add(listNode3, 2);
+
+        ListNode removedNode = linkedList.remove(1);
+
+        assertThat(nodeAtPosition0.getNext()).isEqualTo(nodeAtPosition2);
+        assertThat(removedNode.getNumber()).isEqualTo(2);
         assertThat(removedNode.getNext()).isNull();
     }
 

@@ -56,4 +56,14 @@ class GenericListQueueTest {
         queue.push(1);
         Assertions.assertThat(queue.isEmpty()).isFalse();
     }
+
+    @Test
+    void isNotEmpty_after_pop() {
+        queue.push(1);
+        queue.push(2);
+        Assertions.assertThat(queue.isEmpty()).isFalse();
+
+        queue.pop();
+        Assertions.assertThat(queue.isEmpty()).isFalse();
+    }
 }

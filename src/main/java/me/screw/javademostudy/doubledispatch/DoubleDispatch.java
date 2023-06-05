@@ -7,23 +7,14 @@ import me.screw.javademostudy.doubledispatch.product.Product;
 import me.screw.javademostudy.doubledispatch.product.TV;
 
 import java.util.List;
-import java.util.Map;
 
 public class DoubleDispatch {
 
     public static void main(String[] args) {
-        Map<Company, List<Product>> map = Map.of(
-                new Samsung(), List.of(new TV(), new Phone()),
-                new LG(), List.of(new TV(), new Phone()),
-                new Naver(), List.of(new Application()),
-                new Kakao(), List.of(new Application())
-        );
+        List<Company> companies = List.of(new Samsung(), new LG(), new Naver());
+        List<Product> products = List.of(new TV(), new Phone(), new Application());
 
-        for (Company company : map.keySet()) {
-            List<Product> products = map.get(company);
-            products.forEach(company::create);
-            System.out.println("=====================");
-        }
+        companies.forEach(company -> products.forEach(company::create));
     }
 
 }

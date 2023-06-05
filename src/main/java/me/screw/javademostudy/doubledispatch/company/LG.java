@@ -1,8 +1,10 @@
 package me.screw.javademostudy.doubledispatch.company;
 
+import me.screw.javademostudy.doubledispatch.product.Product;
+
 public class LG implements Company {
     @Override
-    public String getName() {
-        return "LG";
+    public void create(Product product) {
+        product.createdBy(this);
     }
 }

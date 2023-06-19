@@ -8,16 +8,16 @@ public class Phone implements Product {
 
     @Override
     public void createdBy(LG lg) {
-        System.out.println("phone did not created by lg");
+        System.out.println("LG doesn't create Phone");
     }
 
     @Override
     public void createdBy(Naver naver) {
-        System.out.println("phone did not created by naver");
+        System.out.println("Naver doesn't create Phone");
     }
 
     @Override
     public void createdBy(Samsung samsung) {
-        System.out.println("phone created by samsung");
+        System.out.println("Samsung creates Phone");
     }
 }

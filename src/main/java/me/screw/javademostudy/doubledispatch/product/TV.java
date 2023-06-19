@@ -8,16 +8,16 @@ public class TV implements Product {
 
     @Override
     public void createdBy(LG lg) {
-        System.out.println("TV created by lg");
+        System.out.println("LG creates TV");
     }
 
     @Override
     public void createdBy(Naver naver) {
-        System.out.println("TV did not created by naver");
+        System.out.println("Naver doesn't create TV");
     }
 
     @Override
     public void createdBy(Samsung samsung) {
-        System.out.println("TV created by samsung");
+        System.out.println("Samsung creates TV");
     }
 }

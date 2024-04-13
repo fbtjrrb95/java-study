@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+group 'me.screw.annotation'
+version '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = '11'
+targetCompatibility = '11'
+
+
+dependencies {
+    implementation 'com.squareup:javapoet:1.13.0'
+}
+
+jar {
+    from('./src/main/java') {
+        include 'META-INF/services/javax.annotation.processing.Processor'
+    }
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'me.screw.annotation'
+            artifactId = 'collection'
+            version = '1.0.0'
+
+            from components.java
+        }
+    }
+}
+
+

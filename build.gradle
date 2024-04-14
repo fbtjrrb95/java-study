@@ -6,6 +6,7 @@ group 'me.screw'
 version '1.0-SNAPSHOT'
 
 repositories {
+//    mavenLocal()
     mavenCentral()
 }
 
@@ -16,6 +17,8 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
     implementation 'javax.validation:validation-api:2.0.1.Final'
     implementation 'mysql:mysql-connector-java:8.0.28'
+    implementation 'me.screw.annotation:collection:1.0.0'
+    annotationProcessor 'me.screw.annotation:collection:1.0.0'
 
     implementation 'org.eclipse.persistence:javax.persistence:2.2.1'
     implementation 'org.hibernate:hibernate-core:5.3.1.Final'
@@ -28,6 +31,39 @@ dependencies {
     implementation 'jakarta.xml.bind:jakarta.xml.bind-api:2.3.2'
     implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.2'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
+}
+
+compileJava {
+    String relativePath = "src/main/generated"
+    sourceSets {
+        main {
+            java {
+                srcDir relativePath
+            }
+        }
+    }
+    File generatedSourceDir = project.file("src/main/generated")
+
+
+    println "Creating and configuring generated source directory $generatedSourceDir"
+    project.mkdir(generatedSourceDir)
+    options.annotationProcessorGeneratedSourcesDirectory = generatedSourceDir
+    outputs.dir(generatedSourceDir)
+
+    doFirst {
+        // force a clean of generatedSourceDir to prevent java.lang.IllegalStateException: endPosTable already set. This shouldn't be need if using Gradle 4.8+ or Java 9+.
+        project.delete(generatedSourceDir)
+        project.mkdir(generatedSourceDir)
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+            srcDir 'src/main/generated'
+        }
+    }
 }
 
 test {

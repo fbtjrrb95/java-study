@@ -1,5 +1,6 @@
 package me.screw.javademostudy.annotation;
 
+
 @Category("poetry")
 public class PoetryBook implements Book {
 

@@ -2,7 +2,7 @@
 <persistence version="2.1"
              xmlns="http://xmlns.jcp.org/xml/ns/persistence">
     <persistence-unit name="bankUnit">
-        <class>me.screw.javademostudy.lock.Bank</class>
+        <class>me.skrew.javastudy.lock.Bank</class>
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>

@@ -2,11 +2,11 @@ plugins {
     id 'java'
 }
 
-group 'me.screw'
+group 'me.skrew'
 version '1.0-SNAPSHOT'
 
 repositories {
-//    mavenLocal()
+    mavenLocal()
     mavenCentral()
 }
 
@@ -17,8 +17,8 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
     implementation 'javax.validation:validation-api:2.0.1.Final'
     implementation 'mysql:mysql-connector-java:8.0.28'
-    implementation 'me.screw.annotation:collection:1.0.0'
-    annotationProcessor 'me.screw.annotation:collection:1.0.0'
+    implementation 'me.skrew.annotation:collection:1.0.0'
+    annotationProcessor 'me.skrew.annotation:collection:1.0.0'
 
     implementation 'org.eclipse.persistence:javax.persistence:2.2.1'
     implementation 'org.hibernate:hibernate-core:5.3.1.Final'
@@ -67,7 +67,7 @@ sourceSets {
 }
 
 test {
-    useJUnitPlatform {
+    useJUnitPlatform() {
         excludeTags("lock")
     }
 }

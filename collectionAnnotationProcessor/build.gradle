@@ -3,7 +3,7 @@ plugins {
     id 'maven-publish'
 }
 
-group 'me.screw.annotation'
+group 'me.skrew.annotation'
 version '1.0.0'
 
 repositories {
@@ -27,7 +27,7 @@ jar {
 publishing {
     publications {
         maven(MavenPublication) {
-            groupId = 'me.screw.annotation'
+            groupId = 'me.skrew.annotation'
             artifactId = 'collection'
             version = '1.0.0'
 

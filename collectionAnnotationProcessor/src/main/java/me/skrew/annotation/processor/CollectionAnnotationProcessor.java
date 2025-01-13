@@ -27,7 +27,7 @@ public class CollectionAnnotationProcessor extends AbstractProcessor {
 
     @Override
     public SourceVersion getSupportedSourceVersion() {
-        return SourceVersion.RELEASE_11;
+        return SourceVersion.RELEASE_21;
     }
 
     @Override
